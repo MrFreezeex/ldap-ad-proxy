@@ -1,5 +1,4 @@
 # ldap-ad-proxy
-The main feature is support RFC 2696 Paged Results for Active Directory backend, when ldap client is not support it.
 Simple proxing ldap(s) requests to Active Directory.
 
 For setup container, please set variables discribed in env.example file

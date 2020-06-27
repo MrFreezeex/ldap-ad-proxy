@@ -1,4 +1,4 @@
-#!/bin/ash
+#!/bin/sh
 
 # Set debug loglevel as default
 [[ -z "${LOG_LEVEL}" ]] && export LOG_LEVEL=7
@@ -9,10 +9,4 @@
 # make config from env
 envsubst < /tmp/slapd.conf > slapd.conf
 
-# test config and run openldap
-mkdir -p slapd.test \
-&& slaptest -d7 -f slapd.conf -F slapd.test -u \
-&& rm -rf slapd.d \
-&& mv slapd.test slapd.d \
-&& chown -R ldap.ldap slapd.d \
-&& slapd -h 'ldap:/// ldaps:///' -u ldap -d ${LOG_LEVEL}
+exec slapd -h 'ldap:/// ldaps:///' -u ldap -d ${LOG_LEVEL}
